@@ -46,7 +46,6 @@ app.get('/api', function apiIndex(req, res) {
   // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
   // It would be seriously overkill to save any of this to your database.
   res.json({
-    woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
     documentationUrl: "https://github.com/example-username/express_self_api/README.md", // CHANGE ME
     baseUrl: "http://YOUR-APP-NAME.herokuapp.com", // CHANGE ME
@@ -55,7 +54,7 @@ app.get('/api', function apiIndex(req, res) {
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
       {method: "POST", path: "/api/campsites", description: "E.g. Create a new campsite"} // CHANGE ME
     ]
-  })
+  });
 });
 
 /**********
