@@ -1,48 +1,11 @@
 console.log("Sanity Check: JS is working!");
-var template;
-var $venturesList;
-var allVentures = [];
-
-$(document).ready(function(){
-
-  $venturesList = $('#ventureTarget');
-
-  $.ajax({
-    method: 'GET',
-    url: '/api/ventures',
-    success: handleSuccess,
-    error: handleError
-  });
-
-  $('#newVentureForm').on('submit', function(e) {
-    e.preventDefault();
-    $.ajax({
-      method: 'POST',
-      url: '/api/ventures',
-      data: $(this).serialize(),
-      success: newVentureSuccess,
-      error: newVentureError
-    });
-  });
-
-  $venturesList.on('click', '.deleteBtn', function() {
-    $.ajax({
-      method: 'DELETE',
-      url: '/api/ventures/' + $(this).attr('data._id'),
-      success: deleteVentureSuccess,
-      error: deleteVentureError
-    });
-  });
-
-});
-
 function getVentureHtml(venture) {
   return `<hr>
-          <p>
-            <b>${venture.title}</b>
-            by ${venture.description}
-            <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id=${venture._id}>Delete</button>
-          </p>`;
+  <p>
+  <b>${venture.title}</b>
+  by ${venture.description}
+  <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id=${venture._id}>Delete</button>
+  </p>`;
 }
 
 function getAllVenturesHtml(ventures) {
@@ -98,3 +61,38 @@ function deleteVentureSuccess(json) {
 function deleteVentureError() {
 
 }
+
+var $venturesList;
+var allVentures = [];
+
+$(document).ready(function(){
+
+  $venturesList = $('#ventureTarget');
+
+  $.ajax({
+    method: 'GET',
+    url: '/api/ventures',
+    success: handleSuccess,
+    error: handleError
+  });
+
+  $('#newVentureForm').on('submit', function(e) {
+    e.preventDefault();
+    $.ajax({
+      method: 'POST',
+      url: '/api/ventures',
+      data: $(this).serialize(),
+      success: newVentureSuccess,
+      error: newVentureError
+    });
+  });
+
+  $venturesList.on('click', '.deleteBtn', function() {
+    $.ajax({
+      method: 'DELETE',
+      url: '/api/ventures/' + $(this).attr('data._id'),
+      success: deleteVentureSuccess,
+      error: deleteVentureError
+    });
+  });
+});
