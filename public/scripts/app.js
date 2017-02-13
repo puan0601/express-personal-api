@@ -31,11 +31,6 @@ $(document).ready(function(){
     // empty existing posts from view
     $venturesList.empty();
 
-    // helper function to render all posts to view
-    // note: we empty and re-render the collection each time our post data changes
-    function getVenturesHtml() {
-      return allVentures.map(getVentureHtml).join("");
-    }
 
     // pass `allVentures` into the template function
     var venturesHtml = getVenturesHtml(allVentures);
@@ -43,6 +38,12 @@ $(document).ready(function(){
     // append html to the view
     $venturesList.append(venturesHtml);
   }
+  // helper function to render all posts to view
+  // note: we empty and re-render the collection each time our post data changes
+  function getVenturesHtml() {
+    return allVentures.map(getVentureHtml).join("");
+  }
+  
   function getVentureHtml(venture) {
     return `<hr>
             <p>
