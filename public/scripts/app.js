@@ -1,9 +1,8 @@
 console.log("Sanity Check: JS is working!");
 
-
+var allVentures = [];
 $(document).ready(function(){
   var $venturesList = $('#ventureTarget');
-  var allVentures = [];
 
   $.ajax({
     method: 'GET',
@@ -61,7 +60,7 @@ $(document).ready(function(){
   }
 
   function newVentureSuccess(json) {
-    $('#newVentureForm input').val('');
+    $('input').val('');
     allVentures.push(json);
     render();
   }
