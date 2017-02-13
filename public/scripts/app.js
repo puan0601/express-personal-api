@@ -14,7 +14,7 @@ $(document).ready(function(){
     error: handleError
   });
 
-  $('#newVentureForm').on('submit', function(e) {
+  $('#form').on('submit', function(e) {
     e.preventDefault();
     $.ajax({
       method: 'POST',
@@ -25,20 +25,13 @@ $(document).ready(function(){
     });
   });
 
-  $venturesList.on('click', '.deleteBtn', function() {
-    $.ajax({
-      method: 'DELETE',
-      url: '/api/ventures/' + $(this).attr('data._id'),
-      success: deleteVentureSuccess,
-      error: deleteVentureError
-    });
-  });
+
 
   function getVentureHtml(venture) {
     return `<hr>
             <p>
               <b>${venture.title}</b>
-              by ${venture.description}
+              ${venture.description}
               <button type="button" name="button" class="deleteBtn btn btn-danger pull-right" data-id=${venture._id}>Delete</button>
             </p>`;
   }
@@ -60,7 +53,7 @@ $(document).ready(function(){
   }
 
   function handleSuccess(json) {
-    allVentures = json;
+    allVentures.push(json);
     render();
   }
 

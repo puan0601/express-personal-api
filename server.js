@@ -96,7 +96,7 @@ app.get('/api/ventures/:id', function show(req, res) {
   //get venture id from url params ('req.params')
   var ventureId = req.params.id;
 
-  //find venture i db by id
+  //find venture in db by id
   db.Venture.findById(req.params.id, function(err, foundVenture) {
     if (err) {
       if (err.name === "CastError") {
