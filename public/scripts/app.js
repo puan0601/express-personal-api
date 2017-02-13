@@ -53,7 +53,7 @@ $(document).ready(function(){
   }
 
   function handleSuccess(json) {
-    allVentures.push(json);
+    allVentures = json;
     render();
   }
 
@@ -66,27 +66,5 @@ $(document).ready(function(){
     $('#newVentureForm input').val('');
     allVentures.push(json);
     render();
-  }
-
-  function newVentureError() {
-
-  }
-
-  function deleteVentureSuccess(json) {
-    var venture = json;
-    var ventureId = venture._id;
-
-    // find the venture with the correct ID and remove it from our allVentures array
-    for(var index = 0; index < allVentures.length; index++) {
-      if(allVentures[index]._id === ventureId) {
-        allVentures.splice(index, 1);
-        break;  // we found our venture - no reason to keep searching (this is why we didn't use forEach)
-      }
-    }
-    render();
-  }
-
-  function deleteVentureError() {
-
   }
 });
