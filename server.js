@@ -61,6 +61,17 @@ app.get('/api', function apiIndex(req, res) {
   });
 });
 
+app.get('/api/profile', function aboutMe(req, res) {
+  res.json({
+    name: 'Anton Pugach',
+    githubLink: 'https://github.com/puan0601',
+    githubProfileImage: 'https://avatars3.githubusercontent.com/u/19850945?v=3&s=460',
+    personalSiteLink: 'https://puan0601.github.io/',
+    currentCity: 'San Francisco',
+    pets: ['Princess', 'Putin', 'Chantel', 'Nathan', 'Stella', 'CrookShanks']
+  });
+});
+
 /**********
  * SERVER *
  **********/
