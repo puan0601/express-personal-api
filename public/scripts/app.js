@@ -43,7 +43,7 @@ $(document).ready(function(){
   function getVenturesHtml() {
     return allVentures.map(getVentureHtml).join("");
   }
-  
+
   function getVentureHtml(venture) {
     return `<hr>
             <p>
@@ -61,6 +61,7 @@ $(document).ready(function(){
   }
 
   function newVentureSuccess(json) {
+    console.log('new venture added');
     $('form').val('');
     allVentures.push(json);
     render();
