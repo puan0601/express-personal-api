@@ -9,7 +9,7 @@ $(document).ready(function(){
 
   $.ajax({
     method: 'GET',
-    url: 'https://young-gorge-60197.herokuapp.com/api/',
+    url: '/api/ventures',
     success: handleSuccess,
     error: handleError
   });
@@ -18,7 +18,7 @@ $(document).ready(function(){
     e.preventDefault();
     $.ajax({
       method: 'POST',
-      url: 'https://young-gorge-60197.herokuapp.com/api/',
+      url: '/api/ventures',
       data: $(this).serialize(),
       success: newVentureSuccess,
       error: newVentureError
@@ -28,7 +28,7 @@ $(document).ready(function(){
   $venturesList.on('click', '.deleteBtn', function() {
     $.ajax({
       method: 'DELETE',
-      url: 'https://young-gorge-60197.herokuapp.com/api/'+$(this).attr('data-id'),
+      url: '/api/ventures/' + $(this).attr('data._id'),
       success: deleteVentureSuccess,
       error: deleteVentureError
     });
@@ -54,7 +54,7 @@ function render () {
   // empty existing posts from view
   $venturesList.empty();
 
-  // pass `allBooks` into the template function
+  // pass `allVentures` into the template function
   var venturesHtml = getAllVenturesHtml(allVentures);
 
   // append html to the view
@@ -85,11 +85,11 @@ function deleteVentureSuccess(json) {
   var venture = json;
   var ventureId = venture._id;
 
-  // find the book with the correct ID and remove it from our allBooks array
+  // find the venture with the correct ID and remove it from our allVentures array
   for(var index = 0; index < allVentures.length; index++) {
     if(allVentures[index]._id === ventureId) {
       allVentures.splice(index, 1);
-      break;  // we found our book - no reason to keep searching (this is why we didn't use forEach)
+      break;  // we found our venture - no reason to keep searching (this is why we didn't use forEach)
     }
   }
   render();
