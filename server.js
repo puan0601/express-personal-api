@@ -73,15 +73,15 @@ app.get('/api/profile', function aboutMe(req, res) {
   });
 });
 
-//lists all ventures
+// //lists all ventures
 app.get('/api/ventures', function listVentures(req, res) {
-  db.Venture.find({}, function (err, allventures) {
+  db.Venture.find({}, function (err, allVentures) {
     if (err) {res.send("Unable to list all ventures");}
     res.json({ventures: allVentures});
-
+  });
 });
 
-//creates new venture
+// creates new venture
 app.post('/api/ventures', function create(req, res) {
   var newVenture = new db.Venture(req.body);
 
