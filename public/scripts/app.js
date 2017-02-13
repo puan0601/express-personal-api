@@ -10,7 +10,7 @@ $(document).ready(function(){
   $.ajax({
     method: 'GET',
     url: '/api/ventures',
-    success: handleSuccess,
+    success: initialLoadSuccess,
     error: handleError
   });
 
@@ -21,7 +21,7 @@ $(document).ready(function(){
       url: '/api/ventures',
       data: $(this).serialize(),
       success: newVentureSuccess,
-      error: newVentureError
+      error: handleError
     });
   });
 
@@ -41,7 +41,7 @@ $(document).ready(function(){
   }
   // helper function to render all posts to view
   // note: we empty and re-render the collection each time our post data changes
-  function render () {
+  function render(allVentures) {
     // empty existing posts from view
     $venturesList.empty();
 
@@ -52,9 +52,9 @@ $(document).ready(function(){
     $venturesList.append(venturesHtml);
   }
 
-  function handleSuccess(json) {
+  function initialLoadSuccess(json) {
     allVentures = json;
-    render();
+    render(allVentures);
   }
 
   function handleError(e) {
@@ -65,6 +65,6 @@ $(document).ready(function(){
   function newVentureSuccess(json) {
     $('#newVentureForm input').val('');
     allVentures.push(json);
-    render();
+    render(allVentures);
   }
 });
