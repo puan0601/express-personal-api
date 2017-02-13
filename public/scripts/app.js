@@ -38,7 +38,7 @@ $(document).ready(function(){
     }
 
     // pass `allVentures` into the template function
-    var venturesHtml = getVenturesHtml();
+    var venturesHtml = getVenturesHtml(allVentures);
 
     // append html to the view
     $venturesList.append(venturesHtml);
@@ -60,7 +60,7 @@ $(document).ready(function(){
   }
 
   function newVentureSuccess(json) {
-    $('input').val('');
+    $('form').val('');
     allVentures.push(json);
     render();
   }
