@@ -76,7 +76,7 @@ app.get('/api/profile', function aboutMe(req, res) {
 //lists all ventures
 app.get('/api/ventures', function listVentures(req, res) {
   db.Venture.find({}, function (err, allventures) {
-    if (err) {res.send("Unable to list all ventures")}
+    if (err) {res.send("Unable to list all ventures");}
     res.json({ventures: allVentures});
 
 });
@@ -87,9 +87,8 @@ app.post('/api/ventures', function create(req, res) {
 
   //save new venture in db
   newVenture.save(function(err, savedVenture) {
-    if (err) {res.send("Unable to save venture in db");
+    if (err) {res.send("Unable to save venture in db");}
     res.json(savedVenture);
-    }
   });
 });
 
@@ -107,6 +106,37 @@ app.get('/api/ventures/:id', function show(req, res) {
       res.send(err.message);
     }
     res.json(foundVenture);
+  });
+});
+
+//updates venture
+app.put('/api/ventures/:id', function update(req, res) {
+  //get venture id from url param ('req.params')
+  var ventureId = req.params.id;
+
+  //find venture in db by id
+  db.Venture.findOne({ _id: ventureId }, function(err, foundVenture) {
+    if (err) {res.send(err.message);}
+    //update the venture's attributes
+    foundVenture.name = req.body.name;
+    foundVenture.description = req.body.description;
+
+    //save updated venture in db
+    foundVenture.save(function(err, savedVenture) {
+      if (err) {res.send(err.message);}
+      res.json(savedVenture);
+    });
+  });
+});
+
+//delete venture
+app.delete('/api/ventures/:id', function destroy(req, res) {
+  //get venture id from url param ('req.params')
+  var ventureId = req.params.id;
+  //find venture in db by id and remove
+  db.Venture.findOneAndRemove({ _id: ventureId }, function(err, deletedVenture) {
+    if (err) {res.send(err.message)};
+    res.json(deletedVenture);
   });
 });
 
