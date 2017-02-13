@@ -25,8 +25,27 @@ $(document).ready(function(){
     });
   });
 
+  function initialLoadSuccess(json) {
+    allVentures = json;
+    render();
+  }
 
+  function render() {
+    // empty existing posts from view
+    $venturesList.empty();
 
+    // helper function to render all posts to view
+    // note: we empty and re-render the collection each time our post data changes
+    function getVenturesHtml() {
+      return allVentures.map(getVentureHtml).join("");
+    }
+
+    // pass `allVentures` into the template function
+    var venturesHtml = getVenturesHtml();
+
+    // append html to the view
+    $venturesList.append(venturesHtml);
+  }
   function getVentureHtml(venture) {
     return `<hr>
             <p>
@@ -36,26 +55,7 @@ $(document).ready(function(){
             </p>`;
   }
 
-  function getAllVenturesHtml(ventures) {
-    return ventures.map(getVentureHtml).join("");
-  }
-  // helper function to render all posts to view
-  // note: we empty and re-render the collection each time our post data changes
-  function render(allVentures) {
-    // empty existing posts from view
-    $venturesList.empty();
 
-    // pass `allVentures` into the template function
-    var venturesHtml = getAllVenturesHtml(allVentures);
-
-    // append html to the view
-    $venturesList.append(venturesHtml);
-  }
-
-  function initialLoadSuccess(json) {
-    allVentures = json;
-    render(allVentures);
-  }
 
   function handleError(e) {
     console.log('uh oh');
@@ -65,6 +65,6 @@ $(document).ready(function(){
   function newVentureSuccess(json) {
     $('#newVentureForm input').val('');
     allVentures.push(json);
-    render(allVentures);
+    render();
   }
 });
