@@ -1,11 +1,9 @@
 console.log("Sanity Check: JS is working!");
 
-var $venturesList;
-var allVentures = [];
 
 $(document).ready(function(){
-
-  $venturesList = $('#ventureTarget');
+  var $venturesList = $('#ventureTarget');
+  var allVentures = [];
 
   $.ajax({
     method: 'GET',
