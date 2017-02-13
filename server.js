@@ -73,7 +73,8 @@ app.get('/api/profile', function aboutMe(req, res) {
 
 // //lists all ventures
 app.get('/api/ventures', function listVentures(req, res) {
-  db.Venture.find({}, function (err, allVentures) {
+  db.Venture.find({})
+    .exec(function (err, allVentures) {
     if (err) {res.send("Unable to list all ventures");}
     res.json({ventures: allVentures});
   });
