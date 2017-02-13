@@ -97,7 +97,7 @@ app.get('/api/ventures/:id', function show(req, res) {
   var ventureId = req.params.id;
 
   //find venture i db by id
-  db.Venture.findOne({ _id: ventureId }, function(err, foundVenture) {
+  db.Venture.findById(req.params.id, function(err, foundVenture) {
     if (err) {
       if (err.name === "CastError") {
         res.send("Nothing found by this ID");
@@ -111,10 +111,10 @@ app.get('/api/ventures/:id', function show(req, res) {
 //updates venture
 app.put('/api/ventures/:id', function update(req, res) {
   //get venture id from url param ('req.params')
-  var ventureId = req.params.id;
+
 
   //find venture in db by id
-  db.Venture.findOne({ _id: ventureId }, function(err, foundVenture) {
+  db.Venture.findById(req.params.id, function(err, foundVenture) {
     if (err) {res.send(err.message);}
     //update the venture's attributes
     foundVenture.name = req.body.name;

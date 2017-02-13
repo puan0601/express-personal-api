@@ -5,11 +5,14 @@ var db = require('./models');
 
 var new_venture = {description: "OhShii"};
 
-db.Venture.create(new_venture, function(err, venture){
-  if (err){
-    return console.log("Error:", err);
-  }
+db.Venture.remove({}, function(err, ventures) {
+  console.log("removed ventures");
 
+  db.Venture.create(new_venture, function(err, venture){
+    if (err){
+      return console.log("Error:", err);
+    }
   console.log("Created new venture", venture._id);
   process.exit(); // we're all done! Exit the program.
+  });
 });
