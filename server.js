@@ -135,7 +135,7 @@ app.delete('/api/ventures/:id', function destroy(req, res) {
   var ventureId = req.params.id;
   //find venture in db by id and remove
   db.Venture.findOneAndRemove({ _id: ventureId }, function(err, deletedVenture) {
-    if (err) {res.send(err.message)};
+    if (err) {res.send(err.message);}
     res.json(deletedVenture);
   });
 });
