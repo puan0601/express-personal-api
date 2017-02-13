@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var VentureSchema = new Schema({
   description: String,
-
+  title: String
 });
 
 var Venture = mongoose.model('Venture', VentureSchema);
