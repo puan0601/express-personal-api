@@ -54,9 +54,9 @@ app.get('/api', function apiIndex(req, res) {
       {method: "GET", path: "/api/profile", description: "Data about me"},
       {method: "GET", pagh: "/api/ventures", description: "Get a list of ventures"},
       {method: "POST", path: "/api/ventures", description: "Create a new venture"},
-      {method: "GET", path: "/api/ventures/:index", description: "Get info on a specific venture by index"},
-      {method: "PUT", path: "/api/ventures/:index", description: "Update info on a specific venture by index"},
-      {method: "DELETE", path: "/api/ventures/:index", description: "Delete a specific venture by index"}
+      {method: "GET", path: "/api/ventures/:id", description: "Get info on a specific venture by id"},
+      {method: "PUT", path: "/api/ventures/:id", description: "Update info on a specific venture by id"},
+      {method: "DELETE", path: "/api/ventures/:id", description: "Delete a specific venture by id"}
     ]
   });
 });
@@ -90,6 +90,23 @@ app.post('/api/ventures', function create(req, res) {
     if (err) {res.send("Unable to save venture in db");
     res.json(savedVenture);
     }
+  });
+});
+
+//get info on venture by index
+app.get('/api/ventures/:id', function show(req, res) {
+  //get venture id from url params ('req.params')
+  var ventureId = req.params.id;
+
+  //find venture i db by id
+  db.Venture.findOne({ _id: ventureId }, function(err, foundVenture) {
+    if (err) {
+      if (err.name === "CastError") {
+        res.send("Nothing found by this ID");
+      }
+      res.send(err.message);
+    }
+    res.json(foundVenture);
   });
 });
 
